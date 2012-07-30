@@ -4,7 +4,9 @@
  */
 package ru.mail.plugins;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,6 +16,11 @@ import java.util.Map;
  */
 public class CfgDataStr
 {
+    /**
+     * Globar CFs.
+     */
+    private List<MailCF> globalCfs;
+
     /**
      * It is list of projects that contains Mail.Ru select CF. 
      */
@@ -25,6 +32,17 @@ public class CfgDataStr
     public CfgDataStr()
     {
         projs = new HashMap<String, ProjCfs>();
+        globalCfs = new ArrayList<MailCF>();
+    }
+
+    public void addGlobalCf(MailCF cf)
+    {
+        globalCfs.add(cf);
+    }
+
+    public List<MailCF> getGlobalCfs()
+    {
+        return globalCfs;
     }
 
     public ProjCfs getProj(String projKey)
@@ -45,6 +63,6 @@ public class CfgDataStr
     @Override
     public String toString()
     {
-        return "CfgDataStr(projs=" + projs + ")";
+        return "CfgDataStr(projs=" + projs + ", globalCfs=" + globalCfs + ")";
     }
 }

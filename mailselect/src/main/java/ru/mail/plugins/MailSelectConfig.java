@@ -72,29 +72,37 @@ public class MailSelectConfig
         {
             if (cf.getCustomFieldType().getKey().equals("ru.mail.plugins.mailselect:mailru-select"))
             {
-                List<GenericValue> projs = cf.getAssociatedProjects();
-                for (GenericValue proj : projs)
+                if (cf.isGlobal() && perMgr.hasPermission(Permissions.ADMINISTER, getLoggedInUser()))
                 {
-                    String projKey = (String) proj.get("key");
-                    String projName = (String) proj.get("name");
-                    String projDesc = (String) proj.get("description");
-                    String projLead = (String) proj.get("lead");
-
-                    if (!perMgr.hasPermission(Permissions.PROJECT_ADMIN, proj, getLoggedInUser()) &&
-                        !perMgr.hasPermission(Permissions.ADMINISTER, getLoggedInUser()))
+                    MailCF mailCf = new MailCF(cf.getId(), cf.getNameKey(), cf.getName(), cf.getDescription(), msMgr.getValues(Consts.GROBAL_CF_PROJ, cf.getId()));
+                    cfgData.addGlobalCf(mailCf);
+                }
+                else
+                {
+                    List<GenericValue> projs = cf.getAssociatedProjects();
+                    for (GenericValue proj : projs)
                     {
-                        continue;
-                    }
+                        String projKey = (String) proj.get("key");
+                        String projName = (String) proj.get("name");
+                        String projDesc = (String) proj.get("description");
+                        String projLead = (String) proj.get("lead");
 
-                    ProjCfs projCf;
-                    if ((projCf = cfgData.getProj(projKey)) == null)
-                    {
-                        projCf = new ProjCfs(projKey, projName, projDesc, projLead);
-                        cfgData.putProj(projKey, projCf);
-                    }
+                        if (!perMgr.hasPermission(Permissions.PROJECT_ADMIN, proj, getLoggedInUser()) &&
+                            !perMgr.hasPermission(Permissions.ADMINISTER, getLoggedInUser()))
+                        {
+                            continue;
+                        }
 
-                    MailCF mailCf = new MailCF(cf.getId(), cf.getNameKey(), cf.getName(), cf.getDescription(), msMgr.getValues(projKey, cf.getId()));
-                    projCf.putCf(cf.getName(), mailCf);
+                        ProjCfs projCf;
+                        if ((projCf = cfgData.getProj(projKey)) == null)
+                        {
+                            projCf = new ProjCfs(projKey, projName, projDesc, projLead);
+                            cfgData.putProj(projKey, projCf);
+                        }
+
+                        MailCF mailCf = new MailCF(cf.getId(), cf.getNameKey(), cf.getName(), cf.getDescription(), msMgr.getValues(projKey, cf.getId()));
+                        projCf.putCf(cf.getName(), mailCf);
+                    }
                 }
             }
         }

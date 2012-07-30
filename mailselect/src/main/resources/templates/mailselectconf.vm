@@ -9,9 +9,69 @@
         $webResourceManager.requireResource("com.atlassian.auiplugin:ajs")
         $webResourceManager.requireResource("jira.webresources:autocomplete")
         $webResourceManager.requireResource("ru.mail.plugins.mailselect:mailselrsc")
-    </head>
+    </head
     <body class="aui">
         #if($action.hasAdminPermission())
+        #if(!$action.getCfgData().getGlobalCfs().isEmpty())
+        <h2>$action.getText("mailru.selectcf.admin.globalcfs")</h2>
+          #foreach($cf in $action.getCfgData().getGlobalCfs())
+            <table class="jiraform maxWidth">
+              <tr>
+                <td class="jiraformheader">
+                  $cf.getName()#if($cf.getDescr()) - $cf.getDescr()#end
+                </td>
+              </tr>
+              <tr>
+                <td class="jiraformbody">
+                  <table width="100%">
+                    <tr>
+                      <td width="70%" valign="top" align="center">
+                        <table width="100%" class="grid">
+                        <thead>
+                        <tr>
+                          <th width="80%">$action.getText("mailru.selectcf.admin.value")</th>
+                          <th width="20%">$action.getText("mailru.selectcf.admin.act")</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        #foreach($val in $cf.getVals())
+                        <tr>
+                          <td width="80%">$val</val>
+                          <td width="20%"><a href="#" onclick="deleteItem(event, '$action.getBaseUrl()', 'GLOBAL1', '$cf.getId()', '$val');">$action.getText("mailru.selectcf.admin.act.delete")</a></val>
+                        </tr>
+                        #end
+                        </tbody>
+                        </table>
+                      </td>
+                      <td width="30%" valign="top" align="center">
+                        <table class="grid">
+                          <tbody>
+                          <tr>
+                            <td>
+                              <h3 class="formtitle">$action.getText('mailru.selectcf.admin.act.addvalue')</h3>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td class="fieldValueArea" bgcolor="#ffffff">
+                              <input size="20" id='GLOBAL1$cf.getId()' name="" type="text"/>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td vgcolor="#f0f0f0">
+                              <input type="button" value="$action.getText('mailru.selectcf.admin.act.add')" onclick="addItem('$action.getBaseUrl()', 'GLOBAL1', '$cf.getId()');"/>
+                            </td>
+                          </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          #end
+        <br/>
+        #end
         <h2>$action.getText("mailru.selectcf.admin.projs")</h2>
         #foreach($proj in $action.getCfgData().getProjs())
         <table class="jiraform maxWidth">

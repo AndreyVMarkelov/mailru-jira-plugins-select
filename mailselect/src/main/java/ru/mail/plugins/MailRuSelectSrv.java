@@ -84,18 +84,29 @@ public class MailRuSelectSrv
             return Response.serverError().build();
         }
 
-        Project proj = prMgr.getProjectObjByKey(projKey);
-        if (proj == null)
+        if (!projKey.equals(Consts.GROBAL_CF_PROJ))
         {
-            log.error("MailRuSelectSrv::addItem - Project doesn't exist");
-            return Response.serverError().build();
-        }
+            Project proj = prMgr.getProjectObjByKey(projKey);
+            if (proj == null)
+            {
+                log.error("MailRuSelectSrv::addItem - Project doesn't exist");
+                return Response.serverError().build();
+            }
 
-        if (!perMgr.hasPermission(Permissions.ADMINISTER, user) &&
-            !perMgr.hasPermission(Permissions.PROJECT_ADMIN, proj, user))
+            if (!perMgr.hasPermission(Permissions.ADMINISTER, user) &&
+                !perMgr.hasPermission(Permissions.PROJECT_ADMIN, proj, user))
+            {
+                log.error("MailRuSelectSrv::addItem - User has no permissions");
+                return Response.serverError().build();
+            }
+        }
+        else
         {
-            log.error("MailRuSelectSrv::addItem - User has no permissions");
-            return Response.serverError().build();
+            if (!perMgr.hasPermission(Permissions.ADMINISTER, user))
+            {
+                log.error("MailRuSelectSrv::addItem - User has no permissions");
+                return Response.serverError().build();
+            }
         }
 
         Set<String> vals = msMgr.getValues(projKey, cfKey);
@@ -128,18 +139,29 @@ public class MailRuSelectSrv
             return Response.serverError().build();
         }
 
-        Project proj = prMgr.getProjectObjByKey(projKey);
-        if (proj == null)
+        if (!projKey.equals(Consts.GROBAL_CF_PROJ))
         {
-            log.error("MailRuSelectSrv::deleteItem - Project doesn't exist");
-            return Response.serverError().build();
-        }
+            Project proj = prMgr.getProjectObjByKey(projKey);
+            if (proj == null)
+            {
+                log.error("MailRuSelectSrv::deleteItem - Project doesn't exist");
+                return Response.serverError().build();
+            }
 
-        if (!perMgr.hasPermission(Permissions.ADMINISTER, user) &&
-            !perMgr.hasPermission(Permissions.PROJECT_ADMIN, proj, user))
+            if (!perMgr.hasPermission(Permissions.ADMINISTER, user) &&
+                !perMgr.hasPermission(Permissions.PROJECT_ADMIN, proj, user))
+            {
+                log.error("MailRuSelectSrv::deleteItem - User has no permissions");
+                return Response.serverError().build();
+            }
+        }
+        else
         {
-            log.error("MailRuSelectSrv::deleteItem - User has no permissions");
-            return Response.serverError().build();
+            if (!perMgr.hasPermission(Permissions.ADMINISTER, user))
+            {
+                log.error("MailRuSelectSrv::deleteItem - User has no permissions");
+                return Response.serverError().build();
+            }
         }
 
         Set<String> vals = msMgr.getValues(projKey, cfKey);
