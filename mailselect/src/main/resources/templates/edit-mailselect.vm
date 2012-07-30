@@ -1,5 +1,5 @@
 ## Created by Andrey Markelov 29-08-2012.
-## Copyright Mail.Ru Groups 2012. All rights reserved.
+## Copyright Mail.Ru Group 2012. All rights reserved.
 #controlHeader ($action $customField.id $customField.name $fieldLayoutItem.required $displayParameters.noHeader)
 <input type="hidden" name="$customField.id" value="#if($value)$value#end" id="$customField.id" class="textfield" readonly="readonly"/>
 <select id="mailsel$customField.id" name="mailsel$customField.id" onchange="setValue();">

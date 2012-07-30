@@ -1,5 +1,5 @@
 ## Created by Andrey Markelov 29-08-2012.
-## Copyright Mail.Ru Groups 2012. All rights reserved.
+## Copyright Mail.Ru Group 2012. All rights reserved.
 <html>
     <head>
         <title>$i18n.getText("mailru.selectcf.admin")</title>
@@ -63,7 +63,7 @@
                               </tr>
                               <tr>
                                 <td class="fieldValueArea" bgcolor="#ffffff">
-                                  <input size="20" id="$proj.getProjKey()$entry.value.getKey()" name="" type="text"/>
+                                  <input size="20" id='$proj.getProjKey()$entry.value.getKey().replaceAll(" ", "_")' name="" type="text"/>
                                 </td>
                               </tr>
                               <tr>

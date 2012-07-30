@@ -1,8 +1,10 @@
 // Created by Andrey Markelov 29-08-2012.
-// Copyright Mail.Ru Groups 2012. All rights reserved.
+// Copyright Mail.Ru Group 2012. All rights reserved.
 
 function addItem(baseUrl, projKey, cfKey) {
-    var cfVal = AJS.$("#" + projKey + cfKey).val();
+    var id = "#" + projKey + cfKey;
+    var cfVal = AJS.$(id.replace(' ', '_')).val();
+
     if (!cfVal) {
         return;
     }
