@@ -10,11 +10,11 @@
     <version>1.0</version>
 
     <organization>
-        <name>Example Company</name>
-        <url>http://www.example.com/</url>
+        <name>Mail.Ru Group</name>
+        <url>http://www.mail.ru</url>
     </organization>
 
-    <name>mailselect</name>
+    <name>Mail.Ru select CF</name>
     <description>This is the ru.mail.plugins:mailselect plugin for Atlassian JIRA.</description>
     <packaging>atlassian-plugin</packaging>
 
