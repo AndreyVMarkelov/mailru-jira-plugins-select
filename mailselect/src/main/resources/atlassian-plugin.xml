@@ -1,0 +1,58 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+    </plugin-info>
+
+    <resource type="i18n" name="i18n" location="mailselect"/>
+
+    <web-resource key="mailselrsc" name="Mail.Ru select CF resources">
+        <resource type="download" name="mailrusel.css" location="resources/mailrusel.css"/>
+        <resource type="download" name="mailrusel.js" location="resources/mailrusel.js"/>
+    </web-resource>
+
+    <customfield-type key="mailru-select" name="Mail.Ru select custom field" class="ru.mail.plugins.MailSelectCF">
+        <description>Mail.Ru select custom field</description>
+        <resource type="velocity" name="view" location="templates/view-mailselect.vm"/>
+        <resource type="velocity" name="column-view" location="templates/view-mailselect.vm"/>
+        <resource type="velocity" name="xml" location="templates/view-mailselect.vm"/>
+        <resource type="velocity" name="edit" location="templates/edit-mailselect.vm"/>
+    </customfield-type>
+
+    <web-item key="mailselect-configuration" name="Mail.Ru select CF configuration link" section="system.admin/project" weight="95">
+        <label key="mailru.selectcf.admin"/>
+        <conditions type="OR">
+            <condition class="com.atlassian.jira.plugin.webfragment.conditions.JiraGlobalPermissionCondition">
+                <param name="permission">admin</param>
+            </condition>
+            <condition class="com.atlassian.jira.plugin.webfragment.conditions.UserHasVisibleProjectsCondition">
+                <param name="permission">project</param>
+            </condition>
+        </conditions>
+        <link linkId="mailselect-configuration_link">/secure/MailSelectConfig.jspa</link>
+    </web-item>
+
+    <webwork1 key="mailru_select_conf" name="Mail.Ru select CF configuration" class="java.lang.Object">
+        <actions>
+            <action name="ru.mail.plugins.MailSelectConfig" alias="MailSelectConfig">
+                <view name="input">/templates/mailselectconf.vm</view>
+                <view name="success">/templates/mailselectconf.vm</view>
+            </action>
+        </actions>
+    </webwork1>
+
+    <component key="mailselect-config" name="Mail.Ru select Plug-In configuration" class="ru.mail.plugins.MailSelectMgrImpl"/>
+    <component-import key="pluginSettingsFactory">
+        <interface>com.atlassian.sal.api.pluginsettings.PluginSettingsFactory</interface>
+    </component-import>
+    <component-import key="applicationProperties">
+        <interface>com.atlassian.sal.api.ApplicationProperties</interface>
+    </component-import>
+
+    <!-- Rest resources -->
+    <rest key="mailruselectsrv" path="/mailruselectsrv" version="1.0">
+        <description>Provides the REST resource for the Mail.Ru select CF plugin.</description>
+    </rest>
+    <!-- End rest -->
+</atlassian-plugin>

@@ -1,0 +1,92 @@
+## Created by Andrey Markelov 29-08-2012.
+## Copyright Mail.Ru Groups 2012. All rights reserved.
+<html>
+    <head>
+        <title>$i18n.getText("mailru.selectcf.admin")</title>
+        <meta name="decorator" content="admin"/>
+        $webResourceManager.requireResource("jira.webresources:global-static")
+        $webResourceManager.requireResource("jira.webresources:jira-global")
+        $webResourceManager.requireResource("com.atlassian.auiplugin:ajs")
+        $webResourceManager.requireResource("jira.webresources:autocomplete")
+        $webResourceManager.requireResource("ru.mail.plugins.mailselect:mailselrsc")
+    </head>
+    <body class="aui">
+        #if($action.hasAdminPermission())
+        <h2>$action.getText("mailru.selectcf.admin.projs")</h2>
+        #foreach($proj in $action.getCfgData().getProjs())
+        <table class="jiraform maxWidth">
+          <tbody>
+            <tr>
+              <td class="jiraformheader">
+                $proj.getProjName()#if($proj.getProjDesc() != "") - $proj.getProjDesc()#end
+              </td>
+            </tr>
+            <tr>
+              <td class="jiraformbody">
+                <h4>$action.getText("mailru.selectcf.admin.cfs")</h4>
+                #foreach($entry in $proj.getCfs().entrySet())
+                <table class="jiraform maxWidth">
+                  <tr>
+                    <td class="jiraformheader">
+                      $entry.value.getName()#if($entry.value.getDescr() != "") - $entry.value.getDescr()#end
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="jiraformbody">
+                      <table width="100%">
+                      <tr>
+                        <td width="70%" valign="top" align="center">
+                          <table width="100%" class="grid">
+                            <thead>
+                              <tr>
+                                <th width="80%">$action.getText("mailru.selectcf.admin.value")</th>
+                                <th width="20%">$action.getText("mailru.selectcf.admin.act")</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              #foreach($val in $entry.value.getVals())
+                                <tr>
+                                  <td width="80%">$val</val>
+                                  <td width="20%"><a href="#" onclick="deleteItem(event, '$action.getBaseUrl()', '$proj.getProjKey()', '$entry.value.getKey()', '$val');">$action.getText("mailru.selectcf.admin.act.delete")</a></val>
+                                </tr>
+                              #end
+                            </tbody>
+                          </table>
+                        </td>
+                        <td width="30%" valign="top" align="center">
+                          <table class="grid">
+                            <tbody>
+                              <tr>
+                                <td>
+                                  <h3 class="formtitle">$action.getText('mailru.selectcf.admin.act.addvalue')</h3>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td class="fieldValueArea" bgcolor="#ffffff">
+                                  <input size="20" id="$proj.getProjKey()$entry.value.getKey()" name="" type="text"/>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td vgcolor="#f0f0f0">
+                                  <input type="button" value="$action.getText('mailru.selectcf.admin.act.add')" onclick="addItem('$action.getBaseUrl()', '$proj.getProjKey()', '$entry.value.getKey()');"/>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+                #end
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        #end
+        #else
+        <div class="errorArea">$action.getText("mailru.selectcf.admin.link.error")</div>
+        #end
+    </body>
+</html>
