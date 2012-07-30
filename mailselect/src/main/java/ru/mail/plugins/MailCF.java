@@ -13,6 +13,8 @@ import java.util.Set;
  */
 public class MailCF
 {
+    private String id;
+
     private String descr;
 
     private String key;
@@ -21,8 +23,9 @@ public class MailCF
 
     private Set<String> vals;
 
-    public MailCF(String key, String name, String descr, Set<String> vals)
+    public MailCF(String id, String key, String name, String descr, Set<String> vals)
     {
+        this.id = id;
         this.key = key;
         this.name = name;
         this.descr = descr;
@@ -32,6 +35,11 @@ public class MailCF
     public String getDescr()
     {
         return descr;
+    }
+
+    public String getId()
+    {
+        return id;
     }
 
     public String getKey()
@@ -52,6 +60,6 @@ public class MailCF
     @Override
     public String toString()
     {
-        return "MailCF(key=" + key + ", name=" + name + ", descr=" + descr + ", vals=" + vals + ")";
+        return "MailCF[id=" + id + ", key=" + key + ", name=" + name + ", descr=" + descr + ", vals=" + vals + "]";
     }
 }

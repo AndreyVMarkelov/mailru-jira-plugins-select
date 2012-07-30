@@ -23,9 +23,9 @@ public class ProjCfs
 
     private String projKey;
 
-    private String projName;
-
     private String projLead;
+
+    private String projName;
 
     /**
      * Constructor.
@@ -42,11 +42,6 @@ public class ProjCfs
     public MailCF getCf(String cfName)
     {
         return cfs.get(cfName);
-    }
-
-    public String getProjName()
-    {
-        return projName;
     }
 
     public Map<String, MailCF> getCfs()
@@ -69,16 +64,20 @@ public class ProjCfs
         return projLead;
     }
 
+    public String getProjName()
+    {
+        return projName;
+    }
+
     public void putCf(String cfName, MailCF cf)
     {
         cfs.put(cfName, cf);
     }
 
-   @Override
-   public String toString()
-   {
-       return "ProjCfs [cfs=" + cfs + ", projDesc=" + projDesc + ", projKey="
-           + projKey + ", projName=" + projName + ", projLead=" + projLead
-           + "]";
+    @Override
+    public String toString()
+    {
+        return "ProjCfs [cfs=" + cfs + ", projDesc=" + projDesc + ", projKey="
+            + projKey + ", projName=" + projName + ", projLead=" + projLead + "]";
     }
 }

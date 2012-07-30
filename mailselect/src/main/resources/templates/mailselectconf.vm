@@ -18,7 +18,7 @@
           <tbody>
             <tr>
               <td class="jiraformheader">
-                $proj.getProjName()#if($proj.getProjDesc() != "") - $proj.getProjDesc()#end
+                $proj.getProjName()#if($proj.getProjDesc()) - $proj.getProjDesc()#end
               </td>
             </tr>
             <tr>
@@ -28,7 +28,7 @@
                 <table class="jiraform maxWidth">
                   <tr>
                     <td class="jiraformheader">
-                      $entry.value.getName()#if($entry.value.getDescr() != "") - $entry.value.getDescr()#end
+                      $entry.value.getName()#if($entry.value.getDescr()) - $entry.value.getDescr()#end
                     </td>
                   </tr>
                   <tr>
@@ -47,7 +47,7 @@
                               #foreach($val in $entry.value.getVals())
                                 <tr>
                                   <td width="80%">$val</val>
-                                  <td width="20%"><a href="#" onclick="deleteItem(event, '$action.getBaseUrl()', '$proj.getProjKey()', '$entry.value.getKey()', '$val');">$action.getText("mailru.selectcf.admin.act.delete")</a></val>
+                                  <td width="20%"><a href="#" onclick="deleteItem(event, '$action.getBaseUrl()', '$proj.getProjKey()', '$entry.value.getId()', '$val');">$action.getText("mailru.selectcf.admin.act.delete")</a></val>
                                 </tr>
                               #end
                             </tbody>
@@ -63,12 +63,12 @@
                               </tr>
                               <tr>
                                 <td class="fieldValueArea" bgcolor="#ffffff">
-                                  <input size="20" id='$proj.getProjKey()$entry.value.getKey().replaceAll(" ", "_")' name="" type="text"/>
+                                  <input size="20" id='$proj.getProjKey()$entry.value.getId()' name="" type="text"/>
                                 </td>
                               </tr>
                               <tr>
                                 <td vgcolor="#f0f0f0">
-                                  <input type="button" value="$action.getText('mailru.selectcf.admin.act.add')" onclick="addItem('$action.getBaseUrl()', '$proj.getProjKey()', '$entry.value.getKey()');"/>
+                                  <input type="button" value="$action.getText('mailru.selectcf.admin.act.add')" onclick="addItem('$action.getBaseUrl()', '$proj.getProjKey()', '$entry.value.getId()');"/>
                                 </td>
                               </tr>
                             </tbody>

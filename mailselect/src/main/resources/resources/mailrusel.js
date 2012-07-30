@@ -3,7 +3,7 @@
 
 function addItem(baseUrl, projKey, cfKey) {
     var id = "#" + projKey + cfKey;
-    var cfVal = AJS.$(id.replace(' ', '_')).val();
+    var cfVal = AJS.$(id).val();
 
     if (!cfVal) {
         return;

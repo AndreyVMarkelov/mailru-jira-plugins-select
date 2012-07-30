@@ -93,7 +93,7 @@ public class MailSelectConfig
                         cfgData.putProj(projKey, projCf);
                     }
 
-                    MailCF mailCf = new MailCF(cf.getNameKey(), cf.getName(), cf.getDescription(), msMgr.getValues(projKey, cf.getNameKey()));
+                    MailCF mailCf = new MailCF(cf.getId(), cf.getNameKey(), cf.getName(), cf.getDescription(), msMgr.getValues(projKey, cf.getId()));
                     projCf.putCf(cf.getName(), mailCf);
                 }
             }

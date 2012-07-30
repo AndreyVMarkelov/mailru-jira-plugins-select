@@ -44,7 +44,7 @@ public class MailSelectCF
         CustomField field,
         FieldLayoutItem fieldLayoutItem)
     {
-        Set<String> cfVals = msMgr.getValues(issue.getProjectObject().getKey(), field.getNameKey());
+        Set<String> cfVals = msMgr.getValues(issue.getProjectObject().getKey(), field.getId());
 
         Map<String, Object> params = super.getVelocityParameters(issue, field, fieldLayoutItem);
         params.put("cfVals", cfVals);
