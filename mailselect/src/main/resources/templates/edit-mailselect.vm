@@ -4,7 +4,7 @@
 <input type="hidden" name="$customField.id" value="#if($value)$value#end" id="$customField.id" class="textfield" readonly="readonly"/>
 <select id="mailsel$customField.id" name="mailsel$customField.id" onchange="setValue();">
   #foreach($val in $cfVals)
-  <option value="$val" #if($val == $value)selected#end>$val</option>
+  <option value="$val" #if($value && $val == $value)selected#end>$val</option>
   #end
 </select>
 <script language="javascript">
