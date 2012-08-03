@@ -12,13 +12,21 @@
         <resource type="download" name="mailrusel.js" location="resources/mailrusel.js"/>
     </web-resource>
 
-    <customfield-type key="mailru-select" name="Mail.Ru select custom field" class="ru.mail.plugins.MailSelectCF">
+    <customfield-type key="mailru-select" name="Mail.Ru select custom field" class="ru.mail.plugins.ms.MailSelectCF">
         <description>Mail.Ru select custom field</description>
         <resource type="velocity" name="view" location="templates/view-mailselect.vm"/>
         <resource type="velocity" name="column-view" location="templates/view-mailselect.vm"/>
         <resource type="velocity" name="xml" location="templates/view-mailselect.vm"/>
         <resource type="velocity" name="edit" location="templates/edit-mailselect.vm"/>
     </customfield-type>
+
+    <customfield-searcher key="mailru-select-searcher" name="Mail.Ru select custom field Searcher"
+                          i18n-name-key="mailru.selectcf.admin.seacrher" class="ru.mail.plugins.ms.MailSelectSearcher">
+        <description>Allow searching for a Mail.Ru select custom field.</description>
+        <resource type="velocity" name="search" location="templates/plugins/fields/edit-searcher/search-basictext.vm"/>
+        <resource type="velocity" name="view" location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm"/>
+        <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="mailru-select"/>
+    </customfield-searcher>
 
     <web-item key="mailselect-configuration" name="Mail.Ru select CF configuration link" section="system.admin/project" weight="95">
         <label key="mailru.selectcf.admin"/>
@@ -35,14 +43,14 @@
 
     <webwork1 key="mailru_select_conf" name="Mail.Ru select CF configuration" class="java.lang.Object">
         <actions>
-            <action name="ru.mail.plugins.MailSelectConfig" alias="MailSelectConfig">
+            <action name="ru.mail.plugins.ms.MailSelectConfig" alias="MailSelectConfig">
                 <view name="input">/templates/mailselectconf.vm</view>
                 <view name="success">/templates/mailselectconf.vm</view>
             </action>
         </actions>
     </webwork1>
 
-    <component key="mailselect-config" name="Mail.Ru select Plug-In configuration" class="ru.mail.plugins.MailSelectMgrImpl"/>
+    <component key="mailselect-config" name="Mail.Ru select Plug-In configuration" class="ru.mail.plugins.ms.MailSelectMgrImpl"/>
     <component-import key="pluginSettingsFactory">
         <interface>com.atlassian.sal.api.pluginsettings.PluginSettingsFactory</interface>
     </component-import>
