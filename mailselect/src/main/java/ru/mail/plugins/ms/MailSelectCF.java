@@ -51,6 +51,10 @@ public class MailSelectCF
         }
         else
         {
+            if (issue == null || issue.getProjectObject() == null)
+            {
+                return super.getVelocityParameters(issue, field, fieldLayoutItem);
+            }
             cfVals = msMgr.getValues(issue.getProjectObject().getKey(), field.getId());
         }
 
