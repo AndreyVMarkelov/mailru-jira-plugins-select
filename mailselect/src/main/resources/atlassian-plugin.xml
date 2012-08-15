@@ -23,8 +23,9 @@
     <customfield-searcher key="mailru-select-searcher" name="Mail.Ru select custom field Searcher"
                           i18n-name-key="mailru.selectcf.admin.seacrher" class="ru.mail.plugins.ms.MailSelectSearcher">
         <description>Allow searching for a Mail.Ru select custom field.</description>
-        <resource type="velocity" name="search" location="templates/plugins/fields/edit-searcher/search-basictext.vm"/>
-        <resource type="velocity" name="view" location="templates/plugins/fields/view-searcher/view-searcher-basictext.vm"/>
+        <resource type="velocity" name="label" location="templates/label-mailselect.vm"/>
+        <resource type="velocity" name="search" location="templates/search-mailselect.vm"/>
+        <resource type="velocity" name="view" location="templates/view-search-mailselect.vm"/>
         <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="mailru-select"/>
     </customfield-searcher>
 
