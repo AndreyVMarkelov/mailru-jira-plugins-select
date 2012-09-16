@@ -29,17 +29,81 @@
         <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="mailru-select"/>
     </customfield-searcher>
 
-    <web-item key="mailselect-configuration" name="Mail.Ru select CF configuration link" section="system.admin/project" weight="95">
-        <label key="mailru.selectcf.admin"/>
-        <conditions type="OR">
-            <condition class="com.atlassian.jira.plugin.webfragment.conditions.JiraGlobalPermissionCondition">
-                <param name="permission">admin</param>
+    <web-section key="mailru-admin-section_old" name="Link New Issue Operation - Configuration" location="system.admin" weight="20">
+        <description>Mail.Ru Section Descitption</description>
+        <label key="mailru.selectcf.section"/>
+        <conditions type="AND">
+            <condition class="ru.mail.plugins.ms.IsPriorToJiraVersion">
+                <param name="majorVersion">4</param>
+                <param name="minorVersion">4</param>
             </condition>
-            <condition class="com.atlassian.jira.plugin.webfragment.conditions.UserHasVisibleProjectsCondition">
-                <param name="permission">project</param>
-            </condition>
+            <conditions type="OR">
+                <condition class="com.atlassian.jira.plugin.webfragment.conditions.JiraGlobalPermissionCondition">
+                    <param name="permission">admin</param>
+                </condition>
+                <condition class="com.atlassian.jira.plugin.webfragment.conditions.UserHasVisibleProjectsCondition">
+                    <param name="permission">project</param>
+                </condition>
+            </conditions>
         </conditions>
-        <link linkId="mailselect-configuration_link">/secure/MailSelectConfig.jspa</link>
+    </web-section>
+
+    <web-item key="mailselect-configuration_old" name="Link New Issue Operation - Configuration Edition" section="system.admin/mailru-admin-section_old" weight="20">
+        <label key="mailru.selectcf.admin"/>
+        <link linkId="mailselect-configuration_old">/secure/MailSelectConfig.jspa</link>
+        <conditions type="AND">
+            <condition class="ru.mail.plugins.ms.IsPriorToJiraVersion">
+                <param name="majorVersion">4</param>
+                <param name="minorVersion">4</param>
+            </condition>
+            <conditions type="OR">
+                <condition class="com.atlassian.jira.plugin.webfragment.conditions.JiraGlobalPermissionCondition">
+                    <param name="permission">admin</param>
+                </condition>
+                <condition class="com.atlassian.jira.plugin.webfragment.conditions.UserHasVisibleProjectsCondition">
+                    <param name="permission">project</param>
+                </condition>
+            </conditions>
+        </conditions>
+    </web-item>
+
+    <web-section key="mailru-admin-section" name="Mail.Ru Section" location="admin_plugins_menu"
+                 i18n-name-key="mailru-issuecloner.section" weight="900">
+        <label key="mailru.selectcf.section"/>
+        <description>Mail.Ru Section Descitption</description>
+        <conditions type="AND">
+            <condition class="ru.mail.plugins.ms.IsAtLeastJiraVersion">
+                <param name="majorVersion">4</param>
+                <param name="minorVersion">4</param>
+            </condition>
+            <conditions type="OR">
+                <condition class="com.atlassian.jira.plugin.webfragment.conditions.JiraGlobalPermissionCondition">
+                    <param name="permission">admin</param>
+                </condition>
+                <condition class="com.atlassian.jira.plugin.webfragment.conditions.UserHasVisibleProjectsCondition">
+                    <param name="permission">project</param>
+                </condition>
+            </conditions>
+        </conditions>
+    </web-section>
+
+    <web-item key="mailselect-configuration" name="Mail.Ru select CF configuration link" section="admin_plugins_menu/mailru-admin-section" weight="95">
+        <label key="mailru.selectcf.admin"/>
+        <conditions type="AND">
+            <condition class="ru.mail.plugins.ms.IsAtLeastJiraVersion">
+                <param name="majorVersion">4</param>
+                <param name="minorVersion">4</param>
+            </condition>
+            <conditions type="OR">
+                <condition class="com.atlassian.jira.plugin.webfragment.conditions.JiraGlobalPermissionCondition">
+                    <param name="permission">admin</param>
+                </condition>
+                <condition class="com.atlassian.jira.plugin.webfragment.conditions.UserHasVisibleProjectsCondition">
+                    <param name="permission">project</param>
+                </condition>
+            </conditions>
+        </conditions>
+        <link linkId="mailselect-configuration">/secure/MailSelectConfig.jspa</link>
     </web-item>
 
     <webwork1 key="mailru_select_conf" name="Mail.Ru select CF configuration" class="java.lang.Object">

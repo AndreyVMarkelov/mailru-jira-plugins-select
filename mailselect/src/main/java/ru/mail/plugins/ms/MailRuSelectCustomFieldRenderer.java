@@ -4,6 +4,7 @@
  */
 package ru.mail.plugins.ms;
 
+import com.atlassian.crowd.embedded.api.User;
 import com.atlassian.jira.issue.customfields.CustomFieldValueProvider;
 import com.atlassian.jira.issue.customfields.searchers.renderer.CustomFieldRenderer;
 import com.atlassian.jira.issue.fields.CustomField;
@@ -12,7 +13,6 @@ import com.atlassian.jira.issue.search.searchers.impl.NamedTerminalClauseCollect
 import com.atlassian.jira.plugin.customfield.CustomFieldSearcherModuleDescriptor;
 import com.atlassian.jira.web.FieldVisibilityManager;
 import com.atlassian.query.Query;
-import com.opensymphony.user.User;
 
 /**
  * Custom field renderer.
@@ -38,7 +38,6 @@ public class MailRuSelectCustomFieldRenderer
         this.clauseNames = clauseNames;
     }
 
-    @Override
     public boolean isRelevantForQuery(
         User searcher,
         Query query)

@@ -1,17 +1,13 @@
-## Created by Andrey Markelov 29-08-2012.
-## Copyright Mail.Ru Group 2012. All rights reserved.
+$webResourceManager.requireResource("ru.mail.plugins.mailselect:mailselrsc")
 <html>
-    <head>
-        <title>$i18n.getText("mailru.selectcf.admin")</title>
-        <meta name="decorator" content="admin"/>
-        $webResourceManager.requireResource("jira.webresources:global-static")
-        $webResourceManager.requireResource("jira.webresources:jira-global")
-        $webResourceManager.requireResource("com.atlassian.auiplugin:ajs")
-        $webResourceManager.requireResource("jira.webresources:autocomplete")
-        $webResourceManager.requireResource("ru.mail.plugins.mailselect:mailselrsc")
-    </head
-    <body class="aui">
-        #if($action.hasAdminPermission())
+<head>
+    <meta name="decorator" content="admin" />
+    <meta name="admin.active.section" content="admin_plugins_menu/mailru-admin-section">
+    <meta name="admin.active.tab" content="mailselect-configuration">
+    <title>$i18n.getText("mailru.selectcf.admin")</title>
+</head>
+<body>
+#if($action.hasAdminPermission())
         #if(!$action.getCfgData().getGlobalCfs().isEmpty())
         <h2>$action.getText("mailru.selectcf.admin.globalcfs")</h2>
           #foreach($cf in $action.getCfgData().getGlobalCfs())
@@ -148,5 +144,5 @@
         #else
         <div class="errorArea">$action.getText("mailru.selectcf.admin.link.error")</div>
         #end
-    </body>
+</body>
 </html>
