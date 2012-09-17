@@ -1,7 +1,7 @@
 $webResourceManager.requireResource("ru.mail.plugins.mailselect:mailselrsc")
 <html>
 <head>
-    <meta name="decorator" content="admin" />
+    <meta name="decorator" content="admin"/>
     <meta name="admin.active.section" content="admin_plugins_menu/mailru-admin-section">
     <meta name="admin.active.tab" content="mailselect-configuration">
     <title>$i18n.getText("mailru.selectcf.admin")</title>

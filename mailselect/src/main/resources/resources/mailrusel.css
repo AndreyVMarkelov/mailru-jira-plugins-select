@@ -33,6 +33,12 @@
     background-color: rgb(226, 226, 226);
 }
 
+.grid th, .grid td {
+    border: 1px solid #D2D2D2;
+    padding: 4px;
+    vertical-align: top;
+}
+
 .formtitle {
     color: rgb(60, 120, 181);
     font-size: 1.6em;
