@@ -7,29 +7,29 @@
 
     <resource type="i18n" name="i18n" location="mailselect"/>
 
-    <web-resource key="mailselrsc" name="Mail.Ru select CF resources">
+    <web-resource key="mailselrsc" name="An easily filled select list custom field resources">
         <resource type="download" name="mailrusel.css" location="resources/mailrusel.css"/>
         <resource type="download" name="mailrusel.js" location="resources/mailrusel.js"/>
     </web-resource>
 
-    <customfield-type key="mailru-select" name="Mail.Ru select custom field" class="ru.mail.plugins.ms.MailSelectCF">
-        <description>Mail.Ru select custom field</description>
+    <customfield-type key="mailru-select" name="An easily filled select list" class="ru.mail.plugins.ms.MailSelectCF">
+        <description>An easily filled select list.</description>
         <resource type="velocity" name="view" location="templates/view-mailselect.vm"/>
         <resource type="velocity" name="column-view" location="templates/view-mailselect.vm"/>
         <resource type="velocity" name="xml" location="templates/view-mailselect.vm"/>
         <resource type="velocity" name="edit" location="templates/edit-mailselect.vm"/>
     </customfield-type>
 
-    <customfield-searcher key="mailru-select-searcher" name="Mail.Ru select custom field Searcher"
+    <customfield-searcher key="mailru-select-searcher" name="An easily filled select list custom field searcher"
                           i18n-name-key="mailru.selectcf.admin.seacrher" class="ru.mail.plugins.ms.MailSelectSearcher">
-        <description>Allow searching for a Mail.Ru select custom field.</description>
+        <description>Allow searching for an easily filled select list custom field.</description>
         <resource type="velocity" name="label" location="templates/label-mailselect.vm"/>
         <resource type="velocity" name="search" location="templates/search-mailselect.vm"/>
         <resource type="velocity" name="view" location="templates/view-search-mailselect.vm"/>
         <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="mailru-select"/>
     </customfield-searcher>
 
-    <web-section key="mailru-admin-section_old" name="Link New Issue Operation - Configuration" location="system.admin" weight="20">
+    <web-section key="mailru-admin-section_old" name="Mail.Ru Section" location="system.admin" weight="20">
         <description>Mail.Ru Section Descitption</description>
         <label key="mailru.selectcf.section"/>
         <conditions type="AND">
@@ -48,7 +48,7 @@
         </conditions>
     </web-section>
 
-    <web-item key="mailselect-configuration_old" name="Link New Issue Operation - Configuration Edition" section="system.admin/mailru-admin-section_old" weight="20">
+    <web-item key="mailselect-configuration_old" name="An easily filled select list custom field configuration link" section="system.admin/mailru-admin-section_old" weight="20">
         <label key="mailru.selectcf.admin"/>
         <link linkId="mailselect-configuration_old">/secure/MailSelectConfig.jspa</link>
         <conditions type="AND">
@@ -87,7 +87,7 @@
         </conditions>
     </web-section>
 
-    <web-item key="mailselect-configuration" name="Mail.Ru select CF configuration link" section="admin_plugins_menu/mailru-admin-section" weight="95">
+    <web-item key="mailselect-configuration" name="An easily filled select list custom field configuration link" section="admin_plugins_menu/mailru-admin-section" weight="95">
         <label key="mailru.selectcf.admin"/>
         <conditions type="AND">
             <condition class="ru.mail.plugins.ms.IsAtLeastJiraVersion">
@@ -106,7 +106,7 @@
         <link linkId="mailselect-configuration">/secure/MailSelectConfig.jspa</link>
     </web-item>
 
-    <webwork1 key="mailru_select_conf" name="Mail.Ru select CF configuration" class="java.lang.Object">
+    <webwork1 key="mailru_select_conf" name="An easily filled select list custom field configuration action" class="java.lang.Object">
         <actions>
             <action name="ru.mail.plugins.ms.MailSelectConfig" alias="MailSelectConfig">
                 <view name="input">/templates/mailselectconf.vm</view>
@@ -115,7 +115,7 @@
         </actions>
     </webwork1>
 
-    <component key="mailselect-config" name="Mail.Ru select Plug-In configuration" class="ru.mail.plugins.ms.MailSelectMgrImpl"/>
+    <component key="mailselect-config" name="An easily filled select list custom field plugin configuration" class="ru.mail.plugins.ms.MailSelectMgrImpl"/>
     <component-import key="pluginSettingsFactory">
         <interface>com.atlassian.sal.api.pluginsettings.PluginSettingsFactory</interface>
     </component-import>
@@ -125,7 +125,7 @@
 
     <!-- Rest resources -->
     <rest key="mailruselectsrv" path="/mailruselectsrv" version="1.0">
-        <description>Provides the REST resource for the Mail.Ru select CF plugin.</description>
+        <description>Provides the REST resource for an easily filled select list custom field plugin.</description>
     </rest>
     <!-- End rest -->
 </atlassian-plugin>

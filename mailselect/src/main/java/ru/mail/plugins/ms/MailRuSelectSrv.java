@@ -5,10 +5,13 @@
 package ru.mail.plugins.ms;
 
 import java.util.Set;
+import java.util.TreeSet;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -19,6 +22,8 @@ import com.atlassian.jira.project.Project;
 import com.atlassian.jira.project.ProjectManager;
 import com.atlassian.jira.security.PermissionManager;
 import com.atlassian.jira.security.Permissions;
+import com.atlassian.jira.util.json.JSONException;
+import com.atlassian.jira.util.json.JSONObject;
 
 /**
  * This service manages store CF values.
@@ -169,5 +174,51 @@ public class MailRuSelectSrv
         msMgr.setValue(projKey, cfKey, vals);
 
         return Response.ok().build();
+    }
+
+    @GET
+    @Path("/getinfo")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getFieldInfo(@Context HttpServletRequest req)
+    throws JSONException
+    {
+        User user = ComponentManager.getInstance().getJiraAuthenticationContext().getLoggedInUser();
+        if (user == null)
+        {
+            log.error("MailRuSelectSrv::getFieldInfo - User is not logged");
+            return Response.serverError().build();
+        }
+
+        String cfIdStr = req.getParameter("cfid");
+        String project = req.getParameter("project");
+
+        try
+        {
+            Long.parseLong(cfIdStr);
+        }
+        catch (NumberFormatException nex)
+        {
+            log.error("MailRuSelectSrv::getFieldInfo - Incorrect parameters");
+            return Response.serverError().build();
+        }
+
+        Set<String> values = new TreeSet<String>();
+        if (project == null || project.length() == 0)
+        {
+            values.addAll(msMgr.getValues(Consts.GROBAL_CF_PROJ, "customfield_" + cfIdStr));
+        }
+        else
+        {
+            values.addAll(msMgr.getValues(project, "customfield_" + cfIdStr));
+        }
+
+        JSONObject json = new JSONObject();
+        json.put("values", values);
+
+        CacheControl cc = new CacheControl();
+        cc.setNoCache(true);
+        cc.setNoStore(true);
+        cc.setMaxAge(0);
+        return Response.ok(values.toString()).cacheControl(cc).build();
     }
 }

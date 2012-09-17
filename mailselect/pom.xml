@@ -14,8 +14,8 @@
         <url>http://www.mail.ru</url>
     </organization>
 
-    <name>Mail.Ru select CF</name>
-    <description>This is the ru.mail.plugins:mailselect plugin for Atlassian JIRA.</description>
+    <name>An easily filled select list</name>
+    <description>This is an easily filled select list plugin that allows Jira administrators or project managers to configure options from administration page.</description>
     <packaging>atlassian-plugin</packaging>
 
     <dependencies>
@@ -80,7 +80,7 @@
     </build>
 
     <properties>
-        <jira.version>5.1</jira.version>
+        <jira.version>5.1.3</jira.version>
         <jira.data.version>5.1</jira.data.version>
         <amps.version>3.11</amps.version>
         <!--<jira.version>4.3.4</jira.version>
