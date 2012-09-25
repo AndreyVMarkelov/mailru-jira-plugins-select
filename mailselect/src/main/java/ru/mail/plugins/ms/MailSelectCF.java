@@ -12,7 +12,6 @@ import com.atlassian.jira.issue.customfields.impl.TextCFType;
 import com.atlassian.jira.issue.customfields.manager.GenericConfigManager;
 import com.atlassian.jira.issue.customfields.persistence.CustomFieldValuePersister;
 import com.atlassian.jira.issue.fields.CustomField;
-import com.atlassian.jira.issue.fields.config.FieldConfig;
 import com.atlassian.jira.issue.fields.layout.field.FieldLayoutItem;
 
 /**
@@ -47,6 +46,8 @@ public class MailSelectCF
         CustomField field,
         FieldLayoutItem fieldLayoutItem)
     {
+        Map<String, Object> params = super.getVelocityParameters(issue, field, fieldLayoutItem);
+
         Set<String> cfVals;
         if (field.isGlobal())
         {
@@ -56,22 +57,24 @@ public class MailSelectCF
         {
             if (issue == null || issue.getProjectObject() == null)
             {
-                return super.getVelocityParameters(issue, field, fieldLayoutItem);
+                return params;
             }
             cfVals = msMgr.getValues(issue.getProjectObject().getKey(), field.getId());
         }
 
-        Map<String, Object> params = super.getVelocityParameters(issue, field, fieldLayoutItem);
+        String selectVal = "None";
+        String value = (String)issue.getCustomFieldValue(field);
+        for (String cf : cfVals)
+        {
+            selectVal = cf;
+            if (value != null && cf.equals(value))
+            {
+                break;
+            }
+        }
+
+        params.put("selectVal", selectVal);
         params.put("cfVals", cfVals);
         return params;
-    }
-
-    @Override
-    public int compare(
-        String customFieldObjectValue1,
-        String customFieldObjectValue2,
-        FieldConfig fieldConfig)
-    {
-        return super.compare(customFieldObjectValue1, customFieldObjectValue2, fieldConfig);
     }
 }

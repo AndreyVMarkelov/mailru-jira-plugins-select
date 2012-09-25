@@ -38,3 +38,8 @@ function deleteItem(event, baseUrl, projKey, cfKey, cfVal) {
         }
     });
 }
+
+function setValue(id) {
+    var val = AJS.$("#mailsel" + id + " :selected").val();
+    AJS.$("#" + id).val(val);
+}
