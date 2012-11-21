@@ -2,7 +2,11 @@
     <plugin-info>
         <description>${project.description}</description>
         <version>${project.version}</version>
-        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+        <param name="plugin-logo">/resources/simplesel.png</param>
+        <param name="plugin-icon">/resources/simplesel.png</param>
+        <param name="vendor-icon">/resources/icon.png</param>
+        <param name="vendor-logo">/resources/logo.png</param>
     </plugin-info>
 
     <resource type="i18n" name="i18n" location="mailselect"/>
@@ -20,13 +24,29 @@
         <resource type="velocity" name="edit" location="templates/edit-mailselect.vm"/>
     </customfield-type>
 
+    <customfield-type key="mailru-searched-text" name="Statistical Text Field" class="ru.mail.plugins.ms.StatisticalTextField">
+        <description>It's a Text Field that can be used for pie charts.</description>
+        <resource type="velocity" name="view" location="templates/view-stattext.vm"/>
+        <resource type="velocity" name="xml" location="templates/xml-stattext.vm"/>
+        <resource type="velocity" name="edit" location="templates/edit-stattext.vm"/>
+    </customfield-type>
+
     <customfield-searcher key="mailru-select-searcher" name="An easily filled select list custom field searcher"
                           i18n-name-key="mailru.selectcf.admin.seacrher" class="ru.mail.plugins.ms.MailSelectSearcher">
-        <description>Allow searching for an easily filled select list custom field.</description>
+        <description>Allow searching for an easily filled select list custom field</description>
         <resource type="velocity" name="label" location="templates/label-mailselect.vm"/>
         <resource type="velocity" name="search" location="templates/search-mailselect.vm"/>
         <resource type="velocity" name="view" location="templates/view-search-mailselect.vm"/>
         <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="mailru-select"/>
+    </customfield-searcher>
+
+    <customfield-searcher key="mailru-stattext-searcher" name="A statictical text field searcher"
+                          i18n-name-key="mailru.selectcf.admin.stat.seacrher" class="ru.mail.plugins.ms.MailSelectSearcher">
+        <description>Allow searching for a statistical text field</description>
+        <resource type="velocity" name="label" location="templates/label-stattext.vm"/>
+        <resource type="velocity" name="search" location="templates/search-stattext.vm"/>
+        <resource type="velocity" name="view" location="templates/search-view-stattext.vm"/>
+        <valid-customfield-type package="${project.groupId}.${project.artifactId}" key="mailru-searched-text"/>
     </customfield-searcher>
 
     <web-section key="mailru-admin-section_old" name="Mail.Ru Section" location="system.admin" weight="20">

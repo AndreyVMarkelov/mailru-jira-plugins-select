@@ -1,0 +1,14 @@
+## Created by Andrey Markelov 19-11-2012.
+## Copyright Mail.Ru Group 2012. All rights reserved.
+#searcherHeader ($customField)
+#if ($value)
+#set($len = $value.toString().length())
+#if($len > 2)
+#set($endlen = $len - 1)
+#set($val = $value.toString().substring(1, $endlen))
+#else
+#set($val = "")
+#end
+$val
+#end
+#searcherFooter ($customField)

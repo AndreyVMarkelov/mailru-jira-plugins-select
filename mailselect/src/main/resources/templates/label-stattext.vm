@@ -1,0 +1,9 @@
+## Created by Andrey Markelov 29-08-2012.
+## Copyright Mail.Ru Group 2012. All rights reserved.
+#if ($value)
+#if ($urlPrefix && $urlPrefix != '')
+    <a href="${urlPrefix}">$value</a>
+#else
+    $value
+#end
+#end

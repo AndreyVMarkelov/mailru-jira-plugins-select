@@ -4,9 +4,9 @@
  */
 package ru.mail.plugins.ms;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
-import java.util.TreeSet;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 
 /**
@@ -53,7 +53,7 @@ public class MailSelectMgrImpl
     @Override
     public Set<String> getValues(String projKey, String cfName)
     {
-        Set<String> vals = new TreeSet<String>();
+        Set<String> vals = new LinkedHashSet<String>();
 
         String val = getStringProperty(createPropKey(projKey, cfName));
         if (val != null && val.length() > 0)

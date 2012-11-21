@@ -7,15 +7,15 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ru.mail.plugins</groupId>
     <artifactId>mailselect</artifactId>
-    <version>1.1</version>
+    <version>1.2</version>
 
     <organization>
-        <name>Mail.Ru Group</name>
-        <url>http://www.mail.ru</url>
+        <name>Andrey Markelov | Mail.Ru Group</name>
+        <url>http://corp.mail.ru/en</url>
     </organization>
 
     <name>An easily filled select list</name>
-    <description>This is an easily filled select list plugin that allows Jira administrators or project managers to configure options from administration page.</description>
+    <description>This is an easily filled select list plugin that allows Jira administrators or project managers to configure options from administration page and text field which can be used for statistics.</description>
     <packaging>atlassian-plugin</packaging>
 
     <dependencies>
@@ -24,7 +24,7 @@
             <artifactId>atlassian-jira</artifactId>
             <version>${jira.version}</version>
             <scope>provided</scope>
-        </dependency>        
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -80,9 +80,9 @@
     </build>
 
     <properties>
-        <!-- <jira.version>5.1.3</jira.version>
-        <jira.data.version>5.1</jira.data.version>
-        <amps.version>3.11</amps.version> -->
+        <!--<jira.version>5.2</jira.version>
+        <jira.data.version>5.2</jira.data.version>
+        <amps.version>4.0</amps.version>-->
         <jira.version>4.3.4</jira.version>
         <jira.data.version>4.3</jira.data.version>
         <amps.version>3.8</amps.version>
